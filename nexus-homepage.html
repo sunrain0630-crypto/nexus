@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS Technologies - IT 솔루션 전문 기업</title>
+    <style>
+        /* ===== 기본 스타일 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* ===== 헤더 & 네비게이션 ===== */
+        header {
+            background-color: #004499;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #66ccff;
+        }
+
+        /* 관리자 링크 스타일 */
+        .admin-link {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .admin-link:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* ===== 메인 영역 (Hero Section) ===== */
+        .hero {
+            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: slideDown 0.8s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            background-color: white;
+            color: #0066cc;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ===== 서비스 섹션 ===== */
+        .services {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #004499;
+            margin-bottom: 3rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        /* 카드 스타일 */
+        .service-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .service-card:hover {
+            border-color: #0066cc;
+            box-shadow: 0 8px 20px rgba(0, 102, 204, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            color: #0066cc;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .service-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* ===== 회사소개 섹션 ===== */
+        .about {
+            background-color: #f5f9ff;
+            padding: 4rem 2rem;
+            margin: 3rem 0;
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            color: #004499;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            color: #555;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .about-features {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .about-features li {
+            color: #333;
+            margin: 0.8rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .about-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #0066cc;
+            font-weight: bold;
+        }
+
+        .about-image {
+            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+            border-radius: 10px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+
+        /* ===== 문의하기 섹션 ===== */
+        .contact {
+            background-color: white;
+            padding: 4rem 2rem;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact h2 {
+            color: #004499;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact p {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-item {
+            padding: 2rem;
+            background-color: #f5f9ff;
+            border-radius: 8px;
+        }
+
+        .contact-item h4 {
+            color: #0066cc;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-item p {
+            color: #666;
+            margin: 0;
+        }
+
+        /* ===== 푸터 ===== */
+        footer {
+            background-color: #004499;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* ===== 반응형 디자인 (모바일) ===== */
+        @media (max-width: 768px) {
+            /* 네비게이션 */
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            /* 메인 제목 */
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            /* 서비스 카드 */
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            /* 회사소개 */
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            /* 문의 정보 */
+            .contact-info {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            /* 헤더 레이아웃 */
+            .header-container {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+
+        /* ===== 애니메이션 ===== */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== 헤더 ===== -->
+    <header>
+        <div class="header-container">
+            <div class="logo">🚀 NEXUS Technologies</div>
+            <nav>
+                <ul>
+                    <li><a href="#about">회사소개</a></li>
+                    <li><a href="#services">제품소개</a></li>
+                    <li><a href="#contact">오시는길</a></li>
+                    <li><a href="nexus-contact-form.html">문의하기</a></li>
+                    <li><a href="admin-login.html" class="admin-link">🔐 관리자</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ===== 메인 영역 ===== -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1>미래의 기술, 오늘 시작하세요</h1>
+            <p>NEXUS Technologies는 최고 수준의 IT 솔루션으로 기업의 디지털 혁신을 지원합니다</p>
+            <a href="nexus-contact-form.html" class="cta-button">지금 문의하기</a>
+        </div>
+    </section>
+
+    <!-- ===== 주요 서비스 ===== -->
+    <section id="services" class="services">
+        <h2 class="section-title">주요 서비스</h2>
+        <div class="services-grid">
+            <!-- 서비스 1 -->
+            <div class="service-card">
+                <div class="service-icon">☁️</div>
+                <h3>클라우드 솔루션</h3>
+                <p>확장 가능하고 안정적인 클라우드 인프라로 비용을 절감하고 성능을 극대화하세요</p>
+            </div>
+
+            <!-- 서비스 2 -->
+            <div class="service-card">
+                <div class="service-icon">🤖</div>
+                <h3>AI & 머신러닝</h3>
+                <p>인공지능과 머신러닝을 활용해 데이터 기반의 비즈니스 의사결정을 가능하게 합니다</p>
+            </div>
+
+            <!-- 서비스 3 -->
+            <div class="service-card">
+                <div class="service-icon">🔒</div>
+                <h3>사이버 보안</h3>
+                <p>최신 보안 기술로 기업의 정보자산을 철저히 보호하고 위협으로부터 방어합니다</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 회사소개 ===== -->
+    <section id="about" class="about">
+        <div class="about-container">
+            <h2 class="section-title">NEXUS Technologies 소개</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>우리는 누구인가?</h2>
+                    <p>NEXUS Technologies는 10년 이상의 IT 서비스 경험을 바탕으로 기업의 디지털 혁신을 이끌어가는 기업입니다. 우리는 최신 기술과 깊이 있는 업무 이해를 결합하여 맞춤형 솔루션을 제공합니다.</p>
+                    <p>고객 만족을 최우선으로 삼으며, 지속적인 혁신과 발전을 추구합니다.</p>
+                    <ul class="about-features">
+                        <li>500+ 기업과 파트너십</li>
+                        <li>전문가로 구성된 팀</li>
+                        <li>24/7 기술 지원</li>
+                        <li>업계 최고 수준의 보안</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    💻
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 문의하기 ===== -->
+    <section id="contact" class="contact">
+        <div class="contact-container">
+            <h2>연락처</h2>
+            <p>NEXUS Technologies와 함께 디지털 혁신의 여정을 시작하세요</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h4>📧 이메일</h4>
+                    <p>info@nexus-tech.com</p>
+                </div>
+                <div class="contact-item">
+                    <h4>📞 전화</h4>
+                    <p>+82-2-1234-5678</p>
+                </div>
+                <div class="contact-item">
+                    <h4>📍 주소</h4>
+                    <p>서울시 강남구 테헤란로 123</p>
+                </div>
+            </div>
+            <a href="nexus-contact-form.html" class="cta-button">문의하기</a>
+        </div>
+    </section>
+
+    <!-- ===== 푸터 ===== -->
+    <footer>
+        <p>&copy; 2024 NEXUS Technologies. All rights reserved.</p>
+    </footer>
+</body>
+</html>
