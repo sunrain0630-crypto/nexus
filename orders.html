@@ -1,0 +1,12 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>주문 내역 · 배송 조회 | GYEOL 결</title><link rel="stylesheet" href="style.css"></head><body>
+<header id="hd"></header>
+<main class="mp"><h1>주문 내역 · 배송 조회</h1><div class="filter" id="tb"></div><div id="ol"></div><p><a class="btn line" href="mypage.html">마이페이지로 돌아가기</a></p></main>
+<footer id="ft"></footer>
+<script src="main.js"></script>
+<script>
+const g=i=>document.getElementById(i);let tab=/tracking/.test(location.hash+location.search)?'t':'o';
+function draw(){const all=getOrders();
+g('tb').innerHTML=`<button type="button" data-t="o" class="${tab==='o'?'on':''}">주문 내역</button><button type="button" data-t="t" class="${tab==='t'?'on':''}">배송 조회</button>`;
+g('ol').innerHTML=!all.length?'<p class="empty">주문 내역이 없습니다.</p><p style="margin:16px 0 32px"><a class="btn" href="index.html#products">쇼핑하러 가기</a></p>':all.map(o=>{const s=statusOf(o);return `<div class="ot"><div class="oh"><b>${o.no}</b><span>${dt(o.t)}</span><span class="stt">${STEPS[s]}</span></div>`+o.items.map(x=>{const p=P.find(y=>y.id===x.id);return `<div class="it">${art(p)}<div><a href="product.html?id=${p.id}">${p.n}</a><small>${esc(x.o)} · ${x.q}개</small></div><span>${won(p.p*x.q)}</span></div>`}).join('')+(tab==='t'?`<div class="stp">${STEPS.map((n,i)=>`<span class="${i<=s?'on':''}">${n}</span>`).join('')}</div>`:`<div class="rw tt"><span>총 결제금액</span><b>${won(oTotal(o))}</b></div>`)+'</div>'}).join('');}
+g('tb').onclick=e=>{if(e.target.dataset.t){tab=e.target.dataset.t;draw()}};draw();
+</script></body></html>

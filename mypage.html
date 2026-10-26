@@ -1,0 +1,20 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>마이페이지 | GYEOL 결</title><link rel="stylesheet" href="style.css"></head><body>
+<header id="hd"></header>
+<main class="mp"><h1>마이페이지</h1><div id="mp"></div></main>
+<footer id="ft"></footer>
+<script src="main.js"></script>
+<script>
+const g=i=>document.getElementById(i);
+function draw(){const u=ld('gy_user',null),ss=ld('gy_session',null),box=g('mp');
+if(!u||ss!==u.id){box.innerHTML='<div class="done"><h2>로그인이 필요합니다</h2><p>마이페이지는 로그인 후 이용할 수 있습니다.</p><div class="bt"><a class="btn line" href="signup.html">회원가입</a><a class="btn" href="login.html">로그인</a></div></div>';return}
+const all=getOrders(),st=all.map(statusOf),cnt=[0,1,2,3].map(i=>st.filter(s=>s===i).length);
+const ship=all.filter((o,i)=>st[i]===2).flatMap(o=>o.items.map(x=>({...x,p:P.find(y=>y.id===x.id),no:o.no})));
+const seen=new Set(),rec=[];all.forEach(o=>o.items.forEach(x=>{if(!seen.has(x.id)&&rec.length<4){seen.add(x.id);rec.push(P.find(y=>y.id===x.id))}}));
+box.innerHTML=`<div class="pf"><div class="av"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></div><div class="grow"><h2>${esc(u.name)}님</h2><p class="hint">아이디 ${esc(u.id)}<br>이메일 ${esc(u.em||'등록된 이메일이 없습니다')}</p></div><button class="btn line" id="lo" type="button">로그아웃</button></div>
+<section><h2>ORDERS</h2><p class="sub">주문 내역 요약 · 총 ${all.length}건</p><div class="stats">${STEPS.map((n,i)=>`<div><b>${cnt[i]}</b><span>${n}</span></div>`).join('')}</div>
+<div class="sh"><a class="btn line" href="orders.html?tab=orders">주문 내역 바로가기</a><a class="btn line" href="orders.html?tab=tracking">배송 조회 바로가기</a></div><p class="hint" style="margin-top:12px">시연용: 주문 후 시간이 지나면 배송 상태가 자동으로 바뀝니다.</p></section>
+<section><h2>SHIPPING</h2><p class="sub">배송 중인 상품</p>${ship.length?ship.map(x=>`<div class="it">${art(x.p)}<div><a href="product.html?id=${x.p.id}">${x.p.n}</a><small>${esc(x.o)} · ${x.q}개 · 주문번호 ${x.no}</small></div><span>배송 중</span></div>`).join(''):'<p class="empty">배송 중인 상품이 없습니다.</p>'}</section>
+<section><h2>RECENT</h2><p class="sub">최근 구매한 상품</p>${rec.length?`<div class="grid">${rec.map(card).join('')}</div>`:'<p class="empty">최근 구매한 상품이 없습니다.</p>'}</section>`;
+g('lo').onclick=()=>{sv('gy_session',null);draw()};}
+draw();
+</script></body></html>
